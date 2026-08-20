@@ -52,35 +52,46 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
+    html, 
 body {
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-cream);
-  font-family: var(--font-main);
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   position: relative;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 
 .app-wrapper {
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   position: relative;
+}
+
+#main-content {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 2. Redam pelebaran akibat rotasi & animasi AOS */
+.bank-card-wrapper,
+.polaroids {
+  overflow: hidden;
+}
+
+/* Mencegah AOS memicu scrollbar saat translasi */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
+
+/* 3. Batasi row agar margin negatif tidak menembus batas */
+.row {
+  --bs-gutter-x: 1.25rem;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
     html::-webkit-scrollbar,
     body::-webkit-scrollbar,
