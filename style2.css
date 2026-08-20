@@ -53,20 +53,35 @@
       -moz-osx-font-smoothing: grayscale;
     }
     html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-    body,
-    .app-wrapper {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-cream);
-      font-family: var(--font-main);
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-cream);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+}
     html::-webkit-scrollbar,
     body::-webkit-scrollbar,
     .app-wrapper::-webkit-scrollbar {
