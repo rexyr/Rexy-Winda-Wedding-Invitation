@@ -473,6 +473,20 @@ body {
     .typing-container {
       min-height: 1.2em;
     }
+#bounce-target-2 .char {
+  transform: translate3d(0, 30px, 0) scale(0.85);
+  /* Durasi gerak diperlambat menjadi 1.6 detik */
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Jeda kemunculan antar huruf diperlambat (110ms per huruf) */
+  transition-delay: calc(var(--char-index, 0) * 110ms);
+  will-change: transform, opacity;
+}
+
+#bounce-target-2.is-active .char {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
     .typing-container .line {
       display: block;
       color: var(--theme-red);
@@ -550,9 +564,9 @@ body {
     .promise-container {
       margin: 10px auto;
       opacity: 0;
-      transform: translate3d(0, 50px, 0) scale(0.9);
-      transition: opacity 1.35s cubic-bezier(0.22, 1, 0.36, 1), 
-                  transform 1.35s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translate3d(0, 35px, 0) scale(0.95);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity;
     }
     .promise-container.is-active {
@@ -572,8 +586,8 @@ body {
     .quote-text {
       opacity: 0;
       transform: translate3d(0, 20px, 0);
-      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), 
-                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity;
     }
     .quote-text.is-active {
@@ -597,11 +611,10 @@ body {
       margin: 15px auto 0 auto;
       font-family: 'Poppins', sans-serif;
       opacity: 0;
-      transform: scale(0.9) translate3d(0, 24px, 0);
-      transform: scale(0.65) translate3d(0, 40px, 0);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform, opacity;
+      transform: scale(0.65) translate3d(0, 25px, 0);
+  transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
     }
     .smp-card.is-active {
       opacity: 1;
