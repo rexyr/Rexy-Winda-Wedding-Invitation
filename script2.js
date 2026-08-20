@@ -218,34 +218,34 @@
             });
           }, 700);
           // 1. Animasi Typing: "SAVE THE DATE!"
-          setTimeout(() => {
+           setTimeout(() => {
             document.getElementById("bounce-target-2")?.classList.add("is-active");
-          }, 200);
+          }, 600);
 
-          // 2. Animasi Pinky Promise (Slide-up)
+          // 2. Animasi Pinky Promise (Slide-up lambat)
           setTimeout(() => {
             document.getElementById("promise-wrapper")?.classList.add("is-active");
-          }, 550);
+          }, 2600);
 
           // 3. Animasi Typing: "Rexy ♥ Winda"
           setTimeout(() => {
             document.getElementById("bounce-couple-quote")?.classList.add("is-active");
-          }, 950);
+          }, 3300);
 
-          // 4. Animasi Fade-In Teks Ayat
+          // 4. Animasi Fade-In Teks Kutipan Ayat
           setTimeout(() => {
             document.getElementById("quote-body-text")?.classList.add("is-active");
-          }, 1300);
+          }, 4000);
 
           // 5. Animasi Typing Surah: "QS Ar-Rum: 21"
           setTimeout(() => {
             document.getElementById("bounce-surah")?.classList.add("is-active");
-          }, 1600);
+          }, 4350);
 
-          // 6. Spotify Music Player Masuk Cepat & Mulus
+          // 6. Spotify Music Player Masuk Lembut
           setTimeout(() => {
             document.getElementById("smp-player-card")?.classList.add("is-active");
-          }, 1650);
+          }, 4520);
         });
       }
       // COUNTDOWN
