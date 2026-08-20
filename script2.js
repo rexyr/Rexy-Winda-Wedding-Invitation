@@ -14,7 +14,7 @@
       if (!timeline) return;
       const rect = timeline.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const triggerPoint = windowHeight * 0.65; 
+      const triggerPoint = windowHeight * 0.84; 
       const totalHeight = timeline.offsetHeight;
       const currentProgress = triggerPoint - rect.top;
       let percentage = (currentProgress / totalHeight) * 100;
@@ -225,27 +225,27 @@
           // 2. Animasi Pinky Promise (Slide-up lambat)
           setTimeout(() => {
             document.getElementById("promise-wrapper")?.classList.add("is-active");
-          }, 2600);
+          }, 2400);
 
           // 3. Animasi Typing: "Rexy ♥ Winda"
           setTimeout(() => {
             document.getElementById("bounce-couple-quote")?.classList.add("is-active");
-          }, 3300);
+          }, 3200);
 
-          // 4. Animasi Fade-In Teks Kutipan Ayat
+          // 4. Animasi Fade-In Teks Kutipan Ayat (Jeda 0.3s)
           setTimeout(() => {
             document.getElementById("quote-body-text")?.classList.add("is-active");
-          }, 4000);
+          }, 3500);
 
-          // 5. Animasi Typing Surah: "QS Ar-Rum: 21"
+          // 5. Animasi Typing Surah: "QS Ar-Rum: 21" (Jeda 0.3s)
           setTimeout(() => {
             document.getElementById("bounce-surah")?.classList.add("is-active");
-          }, 4350);
+          }, 3800);
 
-          // 6. Spotify Music Player Masuk Lembut
+          // 6. Spotify Music Player Masuk Lembut (Diselaraskan jeda 0.3s ke 4100ms)
           setTimeout(() => {
             document.getElementById("smp-player-card")?.classList.add("is-active");
-          }, 4520);
+          }, 4100);
         });
       }
       // COUNTDOWN
