@@ -220,24 +220,32 @@
           // 1. Animasi Typing: "SAVE THE DATE!"
           setTimeout(() => {
             document.getElementById("bounce-target-2")?.classList.add("is-active");
-          }, 250);
-          // 2. Animasi Promise SVG: Slide-Up dari Bawah
+          }, 200);
+
+          // 2. Animasi Pinky Promise (Slide-up)
           setTimeout(() => {
             document.getElementById("promise-wrapper")?.classList.add("is-active");
-          }, 850);
+          }, 550);
+
           // 3. Animasi Typing: "Rexy ♥ Winda"
           setTimeout(() => {
             document.getElementById("bounce-couple-quote")?.classList.add("is-active");
-          }, 1300);
-          // 4. Animasi Fade-In Teks Ayat & Typing Surah
+          }, 950);
+
+          // 4. Animasi Fade-In Teks Ayat
           setTimeout(() => {
             document.getElementById("quote-body-text")?.classList.add("is-active");
+          }, 1300);
+
+          // 5. Animasi Typing Surah: "QS Ar-Rum: 21"
+          setTimeout(() => {
             document.getElementById("bounce-surah")?.classList.add("is-active");
-          }, 1750);
-          // 5. Animasi Pop-In Spring: Spotify Music Player
+          }, 1600);
+
+          // 6. Spotify Music Player Masuk Cepat & Mulus
           setTimeout(() => {
             document.getElementById("smp-player-card")?.classList.add("is-active");
-          }, 1800);
+          }, 1650);
         });
       }
       // COUNTDOWN
