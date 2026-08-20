@@ -237,7 +237,7 @@
           // 5. Animasi Pop-In Spring: Spotify Music Player
           setTimeout(() => {
             document.getElementById("smp-player-card")?.classList.add("is-active");
-          }, 1750);
+          }, 1800);
         });
       }
       // COUNTDOWN
