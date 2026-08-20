@@ -542,7 +542,7 @@
       background-color: #181818;
       border: 1px solid #282828;
       border-radius: clamp(14px, 3.5vw, 20px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+      /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45); */
       width: 100%;
       max-width: 360px;
       min-height: 110px;
@@ -555,9 +555,9 @@
       margin: 15px auto 0 auto;
       font-family: 'Poppins', sans-serif;
       opacity: 0;
-      transform: scale(0.65) translate3d(0, 40px, 0);
-      transition: opacity 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                  transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(0.9) translate3d(0, 24px, 0);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform, opacity;
     }
     .smp-card.is-active {
