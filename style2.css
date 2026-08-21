@@ -1064,6 +1064,12 @@ body {
       visibility: visible;
       transition: opacity var(--revert-dur, 280ms) ease-out, visibility 0s linear 0s;
     }
+
+    .t-input.is-shaking {
+  animation: t-input-shake calc(
+      var(--shake-dur-a) * 2 + var(--shake-dur-b) * 2
+    ) linear;
+}
     .bank-card-wrapper {
       position: relative;
       width: 100%;
