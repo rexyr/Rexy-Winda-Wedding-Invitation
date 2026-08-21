@@ -467,10 +467,10 @@
             <div class="card border-0 shadow-sm rounded-4 p-4 bg-white h-100" data-aos="fade-up">
               <h4 class="text-center theme-red fw-bold wishing">Ucapan & Doa</h4>
               <p class="text-center small text-muted mb-4">Berikan doa terbaik Anda untuk kami.</p>
-              <form id="rsvp-form">
+              <form id="rsvp-form" novalidate>
                 <div class="mb-3 t-input-wrap" id="wrap-rsvp-name">
                   <div class="t-input">
-                    <input type="text" class="form-control" name="name" id="rsvp-name" placeholder="Nama Anda" required>
+                    <input type="text" class="form-control" name="name" id="rsvp-name" placeholder="Nama Anda">
                   </div>
                   <p class="t-error-msg text-danger small mt-1 mb-0 text-start">
                     <i class="fa-solid fa-circle-exclamation me-1"></i>Nama wajib diisi.
@@ -478,7 +478,7 @@
                 </div>
                 <div class="mb-3 t-input-wrap" id="wrap-rsvp-status">
                   <div class="t-input">
-                    <select class="form-select" id="rsvp-status" name="hadir" required>
+                    <select class="form-select" id="rsvp-status" name="hadir">
                       <option value="" disabled selected>Konfirmasi Kehadiran</option>
                       <option value="Hadir">Hadir</option>
                       <option value="Tidak Hadir">Tidak Hadir</option>
@@ -491,7 +491,7 @@
                 <div class="mb-3 t-input-wrap" id="wrap-rsvp-message">
                   <div class="t-input">
                     <textarea class="form-control" name="ucapan" id="rsvp-message" rows="3"
-                      placeholder="Berikan Ucapan & Doa..." required></textarea>
+                      placeholder="Berikan Ucapan & Doa..."></textarea>
                   </div>
                   <p class="t-error-msg text-danger small mt-1 mb-0 text-start">
                     <i class="fa-solid fa-circle-exclamation me-1"></i>Ucapan & doa tidak boleh kosong.
