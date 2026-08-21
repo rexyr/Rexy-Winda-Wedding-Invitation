@@ -186,6 +186,29 @@
         audio.currentTime = START_OFFSET;
         audio.play();
       });
+
+        let wasPlayingBeforeHidden = false;
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    // Jika audio sedang berputar saat aplikasi di-minimize/pindah tab
+    if (isPlaying) {
+      wasPlayingBeforeHidden = true;
+      audio.pause();
+      updatePlayState(false);
+    }
+  } else {
+    // Lanjutkan putar musik hanya jika sebelumnya sedang aktif
+    if (wasPlayingBeforeHidden) {
+      audio.play().then(() => {
+        updatePlayState(true);
+      }).catch(err => {
+        console.warn("Autoplay resume dibatasi browser:", err);
+      });
+      wasPlayingBeforeHidden = false;
+    }
+  }
+});
       // ===================================================
       // OPEN INVITATION CLICK (SEKUENSI ANIMASI LENGKAP)
       // ===================================================
