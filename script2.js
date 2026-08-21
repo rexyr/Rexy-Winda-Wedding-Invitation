@@ -370,60 +370,132 @@
       }
     }
     const rsvpForm = document.getElementById("rsvp-form");
-    if (rsvpForm) {
-      rsvpForm.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengirim...`;
-        const guestName = document.getElementById("rsvp-name").value.trim();
-        const guestStatus = document.getElementById("rsvp-status").value;
-        const guestMessage = document.getElementById("rsvp-message").value.trim();
-        const wishesContainer = document.getElementById("wishes-container");
-        try {
-          const response = await fetch(SCRIPT_URL, {
-            method: "POST",
-            body: JSON.stringify({ nama: guestName, hadir: guestStatus, ucapan: guestMessage }),
-            headers: { "Content-Type": "text/plain;charset=utf-8" }
-          });
-          const resJson = await response.json();
-          if (resJson.status === "success") {
-            rsvpForm.reset();
-            const urlParams = new URLSearchParams(window.location.search);
-            const guestParam = urlParams.get('to');
-            if (guestParam) {
-              document.getElementById("rsvp-name").value = guestParam;
-            }
-            document.getElementById('modal-guest-name').textContent = guestName ? `Kak ${guestName}` : "Anda";
-            new bootstrap.Modal(document.getElementById('successModal')).show();
-            const badgeClass = guestStatus === "Hadir"
-              ? "bg-success-subtle text-success border border-success-subtle"
-              : "bg-secondary-subtle text-secondary border border-secondary-subtle";
-            const newWish = `
-              <div class="p-3 mb-2 bg-light bg-opacity-75 rounded-3 border">
-                <div class="d-flex justify-content-between align-items-center mb-1">
-                  <span class="fw-bold text-dark small">${guestName}</span>
-                  <span class="badge rounded-pill ${badgeClass}" style="font-size: 0.7rem;">${guestStatus}</span>
-                </div>
-                <p class="text-secondary small mb-1" style="white-space: pre-line;">${guestMessage}</p>
-                <div class="text-muted" style="font-size: 0.65rem;">Baru saja</div>
-              </div>
-            `;
-            if (wishesContainer.innerHTML.includes("Belum ada ucapan")) {
-              wishesContainer.innerHTML = newWish;
-            } else {
-              wishesContainer.insertAdjacentHTML("afterbegin", newWish);
-            }
-          }
-        } catch (err) {
-          alert("Terjadi gangguan koneksi saat mengirim ucapan.");
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
+
+if (rsvpForm) {
+  // Helper fungsi untuk memicu animasi shake dan pesan error
+  function triggerInputError(inputEl) {
+    const wrap = inputEl.closest('.t-input-wrap');
+    const inputContainer = wrap ? wrap.querySelector('.t-input') : null;
+    if (!wrap || !inputContainer) return;
+
+    wrap.classList.add('is-error');
+    inputContainer.classList.add('is-error');
+
+    // Force reflow agar animasi shake bisa di-trigger ulang berkali-kali
+    inputContainer.classList.remove('is-shaking');
+    void inputContainer.offsetWidth;
+    inputContainer.classList.add('is-shaking');
+
+    // Auto revert (hilangkan border merah setelah hold time)
+    if (wrap.errorTimeout) clearTimeout(wrap.errorTimeout);
+    wrap.errorTimeout = setTimeout(() => {
+      wrap.classList.remove('is-error');
+      inputContainer.classList.remove('is-error', 'is-shaking');
+    }, 3000);
+  }
+
+  // Bersihkan status error secara instan saat pengguna mulai mengetik/memilih opsi
+  ['rsvp-name', 'rsvp-status', 'rsvp-message'].forEach(id => {
+    const field = document.getElementById(id);
+    if (!field) return;
+    
+    ['input', 'change'].forEach(evt => {
+      field.addEventListener(evt, () => {
+        const wrap = field.closest('.t-input-wrap');
+        const inputContainer = wrap ? wrap.querySelector('.t-input') : null;
+        if (wrap && field.value.trim() !== '') {
+          if (wrap.errorTimeout) clearTimeout(wrap.errorTimeout);
+          wrap.classList.remove('is-error');
+          if (inputContainer) inputContainer.classList.remove('is-error', 'is-shaking');
         }
       });
+    });
+  });
+
+  // Handler Submit Form
+  rsvpForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const nameInput = document.getElementById("rsvp-name");
+    const statusInput = document.getElementById("rsvp-status");
+    const messageInput = document.getElementById("rsvp-message");
+
+    const guestName = nameInput.value.trim();
+    const guestStatus = statusInput.value;
+    const guestMessage = messageInput.value.trim();
+
+    let hasError = false;
+
+    // Validasi setiap field
+    if (!guestName) {
+      triggerInputError(nameInput);
+      hasError = true;
     }
+    if (!guestStatus) {
+      triggerInputError(statusInput);
+      hasError = true;
+    }
+    if (!guestMessage) {
+      triggerInputError(messageInput);
+      hasError = true;
+    }
+
+    // Hentikan pengiriman jika ada field yang kosong
+    if (hasError) return;
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengirim...`;
+
+    const wishesContainer = document.getElementById("wishes-container");
+
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({ nama: guestName, hadir: guestStatus, ucapan: guestMessage }),
+        headers: { "Content-Type": "text/plain;charset=utf-8" }
+      });
+      const resJson = await response.json();
+      
+      if (resJson.status === "success") {
+        rsvpForm.reset();
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestParam = urlParams.get('to');
+        if (guestParam) {
+          nameInput.value = guestParam;
+        }
+        
+        document.getElementById('modal-guest-name').textContent = guestName ? `Kak ${guestName}` : "Anda";
+        new bootstrap.Modal(document.getElementById('successModal')).show();
+
+        const badgeClass = guestStatus === "Hadir"
+          ? "bg-success-subtle text-success border border-success-subtle"
+          : "bg-secondary-subtle text-secondary border border-secondary-subtle";
+        const newWish = `
+          <div class="p-3 mb-2 bg-light bg-opacity-75 rounded-3 border">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="fw-bold text-dark small">${guestName}</span>
+              <span class="badge rounded-pill ${badgeClass}" style="font-size: 0.7rem;">${guestStatus}</span>
+            </div>
+            <p class="text-secondary small mb-1" style="white-space: pre-line;">${guestMessage}</p>
+            <div class="text-muted" style="font-size: 0.65rem;">Baru saja</div>
+          </div>
+        `;
+        if (wishesContainer.innerHTML.includes("Belum ada ucapan")) {
+          wishesContainer.innerHTML = newWish;
+        } else {
+          wishesContainer.insertAdjacentHTML("afterbegin", newWish);
+        }
+      }
+    } catch (err) {
+      alert("Terjadi gangguan koneksi saat mengirim ucapan.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
+  });
+}
     // MODAL GALLERY ENGINE
     const galleryModalEl = document.getElementById('galleryModal');
     const galleryModal = new bootstrap.Modal(galleryModalEl);
