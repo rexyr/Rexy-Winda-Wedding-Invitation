@@ -83,7 +83,7 @@ body {
   position: relative;
 }
 
-#main-content {
+/* #main-content {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
@@ -108,7 +108,7 @@ body {
   --bs-gutter-x: 1.25rem;
   margin-left: 0 !important;
   margin-right: 0 !important;
-}
+} */
     html::-webkit-scrollbar,
     body::-webkit-scrollbar,
     .app-wrapper::-webkit-scrollbar {
