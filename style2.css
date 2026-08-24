@@ -1036,7 +1036,7 @@ body {
       transition: none;
     }
     .date-circle-container.revealed .scribble-path {
-      transition: stroke-dashoffset 0.9s var(--ease-smooth) 1.2s;
+      transition: stroke-dashoffset 1.9s var(--ease-smooth) 1.2s;
       stroke-dashoffset: 0 !important;
     }
     .t-input-wrap {
@@ -1109,6 +1109,13 @@ body {
       margin: 0 auto;
       padding: 0;
       container-type: inline-size;
+    }
+
+    .doodle-card-fixed svg path,
+    .doodle-card-fixed svg circle,
+    .doodle-card-fixed svg rect,
+    .doodle-card-fixed svg g {
+      fill: none
     }
     .doodle-card-fixed {
       border: none;
