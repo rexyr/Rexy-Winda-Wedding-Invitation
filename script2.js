@@ -22,15 +22,19 @@
       timeline.style.setProperty("--line-height", percentage + "%");
       
       items.forEach((item, index) => {
-        if (index === 0) return;
-        const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < triggerPoint) {
-          item.classList.add("active");
-        } else {
-          item.classList.remove("active");
-        }
-      });
-    });
+    if (index === 0) return;
+    const card = item.querySelector(".timeline-content-card");
+    const itemRect = item.getBoundingClientRect();
+    
+    if (itemRect.top < triggerPoint) {
+      item.classList.add("active");
+      if (card) card.classList.add("active");
+    } else {
+      item.classList.remove("active");
+      if (card) card.classList.remove("active");
+    }
+  });
+});
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCrC7exTwOwC9WMUTnUPKlyhow7iXqIHmHvdKl14k4E4RDTqTaZs9MzO3fkyq1ee6Wlg/exec";
     
     document.addEventListener("DOMContentLoaded", () => {
