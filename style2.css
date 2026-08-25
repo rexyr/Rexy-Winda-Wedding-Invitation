@@ -850,7 +850,7 @@ body {
       transition: height 0.1s linear;
     }
 .timeline-year {
-  position: absolute;
+  /* position: absolute; */
   top: 15px;
   right: 18px;
 
@@ -969,6 +969,10 @@ body {
       }
       .timeline-item:nth-child(even) .timeline-content-card {
         text-align: left;
+      }
+        .timeline-item:nth-child(even) .timeline-year {
+        margin-right: auto; /* Rata kiri */
+        margin-left: 0;
       }
     }
     .std-section-wrapper {
