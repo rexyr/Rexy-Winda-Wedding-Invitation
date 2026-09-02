@@ -3,7 +3,7 @@
        =================================================== */
     @font-face {
       font-family: 'Providence Sans Offc W00 Bold';
-      src: url('./Font/providence-bold.woff2') format('woff2');
+      src: url('./Font/Providence Sans Offc W00 Bold.woff2') format('woff2');
       font-display: swap;
     }
     :root {
